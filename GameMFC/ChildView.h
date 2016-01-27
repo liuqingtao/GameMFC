@@ -16,7 +16,9 @@ public:
 
 // Attributes
 public:
-
+	CRect m_client;
+	CDC m_bgcDC;	//定义一个内存DC
+	CBitmap m_bgBitmap;	//定义一个位图对象
 // Operations
 public:
 

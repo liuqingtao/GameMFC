@@ -210,6 +210,10 @@
     <None Include="res\GameMFC.rc2" />
   </ItemGroup>
   <ItemGroup>
+    <Image Include="C:\Users\Administrator\Desktop\bmp\bg.bmp" />
+    <Image Include="c:\users\administrator\desktop\bmp\bitmap2.bmp" />
+    <Image Include="C:\Users\Administrator\Desktop\bmp\hero.png" />
+    <Image Include="C:\Users\Administrator\Desktop\bmp\hero_No.png" />
     <Image Include="res\GameMFC.ico" />
     <Image Include="res\Toolbar.bmp" />
   </ItemGroup>

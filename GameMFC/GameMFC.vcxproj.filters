@@ -68,5 +68,17 @@
     <Image Include="res\Toolbar.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="C:\Users\Administrator\Desktop\bmp\bg.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\Administrator\Desktop\bmp\hero.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="C:\Users\Administrator\Desktop\bmp\hero_No.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="c:\users\administrator\desktop\bmp\bitmap2.bmp">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
 </Project>
