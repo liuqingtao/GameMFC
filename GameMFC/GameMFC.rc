@@ -66,16 +66,16 @@ END
 // Bitmap
 //
 
-IDB_BITMAP1             BITMAP                  "C:\\Users\\Administrator\\Desktop\\bmp\\bg.bmp"
-IDB_BITMAP2             BITMAP                  "c:\\users\\administrator\\desktop\\bmp\\bitmap2.bmp"
+IDB_BITMAP1             BITMAP                  "res\\bg.bmp"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // PNG
 //
 
-IDB_PNG1                PNG                     "C:\\Users\\Administrator\\Desktop\\bmp\\hero.png"
-IDB_PNG2                PNG                     "C:\\Users\\Administrator\\Desktop\\bmp\\hero_No.png"
+IDB_PNG1                PNG                     "res\\hero.png"
+IDB_PNG2                PNG                     "res\\hero_No.png"
 #endif    // Chinese (Simplified, PRC) resources
 /////////////////////////////////////////////////////////////////////////////
 

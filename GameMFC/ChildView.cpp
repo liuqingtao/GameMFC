@@ -42,6 +42,8 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	m_bgcDC.CreateCompatibleDC(NULL);	//创建一个DC
 	m_bgBitmap.LoadBitmap(IDB_BITMAP1);	//加载位图
 	m_bgcDC.SelectObject(&m_bgBitmap);	//将位图与DC关联
+	CString path("res\\hero.png");
+	m_hero.Load(path); //加载PNG图片
 	return TRUE;
 }
 
@@ -52,6 +54,7 @@ void CChildView::OnPaint()
 	// TODO: Add your message handler code here
 	GetClientRect(&m_client);	//获取窗口大小
 	cDC->BitBlt(0, 0, m_client.Width(), m_client.Height(), &m_bgcDC, 0, 0, SRCCOPY);	//将内存DC的内容粘贴到窗口DC中
+	m_hero.Draw(*cDC, 100, 400, 60, 60); //绘制PNG图片到DC窗口
 	ReleaseDC(cDC);
 	// Do not call CWnd::OnPaint() for painting messages
 }
