@@ -17,9 +17,10 @@ public:
 // Attributes
 public:
 	CRect m_client;
+	CRect m_heroPoint;
 	CDC m_bgcDC;	//定义一个内存DC
 	CBitmap m_bgBitmap;	//定义一个位图对象
-	CImage m_hero;
+	CImage m_hero; //定义一个PNG对象
 // Operations
 public:
 
@@ -35,5 +36,8 @@ public:
 protected:
 	afx_msg void OnPaint();
 	DECLARE_MESSAGE_MAP()
+public:
+	afx_msg void OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags);
+	afx_msg void OnLButtonDown(UINT nFlags, CPoint point);
 };
 
