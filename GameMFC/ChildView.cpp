@@ -26,7 +26,16 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
 END_MESSAGE_MAP()
 
-
+void TransparentPNG(CImage *png) {
+	for (int i = 0; i < png->GetWidth(); i++) {
+		for (int j = 0; j < png->GetHeight(); j++) {
+			unsigned char* pucColor = reinterpret_cast<unsigned char*>(png->GetPixelAddress(i, j));
+			pucColor[0] = pucColor[0] * pucColor[3] / 255;
+			pucColor[1] = pucColor[1] * pucColor[3] / 255;
+			pucColor[2] = pucColor[2] * pucColor[3] / 255;
+		}
+	}
+}
 
 // CChildView message handlers
 
@@ -44,6 +53,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	m_bgcDC.SelectObject(&m_bgBitmap);	//将位图与DC关联
 	CString path("res\\hero.png");
 	m_hero.Load(path); //加载PNG图片
+	TransparentPNG(&m_hero); //去掉白色底板
 	return TRUE;
 }
 
