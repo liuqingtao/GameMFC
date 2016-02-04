@@ -75,6 +75,7 @@ void CChildView::OnPaint()
 	GetClientRect(&mclient);	//获取窗口大小
 	cDC->BitBlt(0, 0, mclient.Width(), mclient.Height(), &mbgcDC, 0, 0, SRCCOPY);	//将内存DC的内容粘贴到窗口DC中
 	mhero.Draw(*cDC, mheroPoint); //绘制PNG图片到DC窗口
+	ValidateRect(&mclient); //在绘制完图后,使窗口区有效
 	ReleaseDC(cDC);
 	// Do not call CWnd::OnPaint() for painting messages
 }
