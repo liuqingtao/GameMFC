@@ -5,6 +5,7 @@
 #include "stdafx.h"
 #include "ScrollMap.h"
 #include "ChildView.h"
+#include "iostream"
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -83,6 +84,23 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	Myhero.y = 400;
 
 	mxMapStart = 0;
+	//加载雪花图像
+
+	for (int i = 0; i < 7; i++)
+	{
+		CString snowDress("res\\snow\\" + i);
+		CString lastName(".png");
+		CString snowPath(snowDress + lastName);
+		std::clog<< snowPath;
+		msnowMap[i].Load(snowPath);
+	}
+	//初始化雪花粒子
+	for (int i = 0; i < SNOW_NUMBER; i++)
+	{
+		Snow[i].x = rand() % WINDOW_WIDTH;
+		Snow[i].y = rand() % WINDOW_HEIGHT;
+		Snow[i].number = rand() % 7;
+	}
 	return TRUE;
 }
 //计算左端X开始位置
@@ -123,6 +141,24 @@ void CChildView::OnPaint()
 	mbg.Draw(mcacheDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, mxMapStart, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	//贴英雄
 	Myhero.hero.Draw(mcacheDC, GetScreenX(Myhero.x, mMapWidth), Myhero.y, 80, 80, Myhero.frame * 80, Myhero.direct * 80, 80, 80);
+	//贴雪花
+	for (int i = 0; i < SNOW_NUMBER; i++)
+	{
+		msnowMap[Snow[i].number].Draw(mcacheDC, Snow[i].x, Snow[i].y, 32, 32);
+		Snow[i].y += 1;
+		if (Snow[i].y >= 600)
+		{
+			Snow[i].y = 0;
+		}
+		if (Snow[i].x % 2 == 0)
+			Snow[i].x += 1;
+		else
+			Snow[i].x -= 1;
+		if (Snow[i].x < 0)
+			Snow[i].x = WINDOW_WIDTH;
+		else if (Snow[i].x >= WINDOW_WIDTH)
+			Snow[i].x = 0;
+	}
 	//最后将缓冲DC内容输出到窗口DC中
 	cDC->BitBlt(0, 0, mclient.Width(), mclient.Height(), &mcacheDC, 0, 0, SRCCOPY);
 	//------------------绘制完毕--------------------------------------------

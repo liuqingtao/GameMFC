@@ -31,12 +31,19 @@
 #define IDS_EDIT_MENU                   306
 #define IDB_PNG1                        310
 #define IDB_PNG2                        311
+#define IDB_PNG3                        312
+#define IDB_PNG4                        313
+#define IDB_PNG5                        314
+#define IDB_PNG6                        315
+#define IDB_PNG7                        316
+#define IDB_PNG8                        317
+#define IDB_PNG9                        318
 
 // Next default values for new objects
 // 
 #ifdef APSTUDIO_INVOKED
 #ifndef APSTUDIO_READONLY_SYMBOLS
-#define _APS_NEXT_RESOURCE_VALUE        312
+#define _APS_NEXT_RESOURCE_VALUE        319
 #define _APS_NEXT_COMMAND_VALUE         32771
 #define _APS_NEXT_CONTROL_VALUE         1000
 #define _APS_NEXT_SYMED_VALUE           310

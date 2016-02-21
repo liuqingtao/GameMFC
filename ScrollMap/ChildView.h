@@ -7,7 +7,7 @@
 
 
 // CChildView window
-
+#define SNOW_NUMBER 100
 class CChildView : public CWnd
 {
 // Construction
@@ -16,6 +16,16 @@ public:
 
 // Attributes
 public:
+	//雪花粒子结构体
+	struct snow
+	{
+		int x;
+		int y;
+		int number; //粒子编号，共七种粒子
+	};
+	snow Snow[SNOW_NUMBER];
+	CImage msnowMap[7];
+	//英雄结构体
 	struct shero
 	{
 		CImage hero;
