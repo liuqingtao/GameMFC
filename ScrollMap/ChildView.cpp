@@ -9,7 +9,9 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-
+//定时器的名称
+#define TIMER_PAINT 1
+#define TIMER_HEROMOVE 2
 //定义四个方向
 #define DOWN 0
 #define LEFT 1
@@ -32,6 +34,9 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
+	ON_WM_KEYDOWN()
+	ON_WM_TIMER()
+	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
 //将png贴图透明  
@@ -130,3 +135,69 @@ void CChildView::OnPaint()
 	// Do not call CWnd::OnPaint() for painting messages
 }
 
+
+
+void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: Add your message handler code here and/or call default
+	switch (nChar)
+	{
+	case 'd':
+	case 'D':
+		Myhero.direct = RIGHT;
+		Myhero.x += 5;
+		break;
+	case 'a':
+	case 'A':
+		Myhero.direct = LEFT;
+		Myhero.x -= 5;
+		break;
+	case 's':
+	case 'S':
+		Myhero.direct = DOWN;
+		Myhero.y += 5;
+		break;
+	case 'w':
+	case 'W':
+		Myhero.direct = UP;
+		Myhero.y -= 5;
+		break;
+	
+	}
+	
+}
+
+
+void CChildView::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+
+	switch (nIDEvent)
+	{
+	case TIMER_PAINT:
+		OnPaint();
+		break;
+	case TIMER_HEROMOVE:
+	{
+		Myhero.frame++;
+		if (Myhero.frame == 4)
+		{
+			Myhero.frame = 0;
+		}
+	}
+	break;
+	}
+}
+
+
+
+	int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+	{
+		if (CWnd::OnCreate(lpCreateStruct) == -1)
+			return -1;
+
+		// TODO:  Add your specialized creation code here
+		SetTimer(TIMER_PAINT, 10, NULL);
+		SetTimer(TIMER_HEROMOVE, 100, NULL);
+		return 0;
+	}
