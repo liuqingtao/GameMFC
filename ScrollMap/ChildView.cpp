@@ -6,6 +6,7 @@
 #include "ScrollMap.h"
 #include "ChildView.h"
 #include "iostream"
+#include <string>
 
 #ifdef _DEBUG
 #define new DEBUG_NEW
@@ -85,15 +86,33 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 
 	mxMapStart = 0;
 	//加载雪花图像
-
+	
 	for (int i = 0; i < 7; i++)
 	{
-		CString snowDress("res\\snow\\" + i);
-		CString lastName(".png");
-		CString snowPath(snowDress + lastName);
-		std::clog<< snowPath;
+		
+		CString num;
+		num.Format(_T("%d"), i);
+		CString snowPath;
+		snowPath = _T("res\\snow\\") + num + _T(".png");
 		msnowMap[i].Load(snowPath);
 	}
+	
+	/*
+	CString snowPath("res\\snow\\0.png");
+	msnowMap[0].Load(snowPath);
+	snowPath = "res\\snow\\1.png";
+	msnowMap[1].Load(snowPath);
+	snowPath = "res\\snow\\2.png";
+	msnowMap[2].Load(snowPath);
+	snowPath = "res\\snow\\3.png";
+	msnowMap[3].Load(snowPath);
+	snowPath = "res\\snow\\4.png";
+	msnowMap[4].Load(snowPath);
+	snowPath = "res\\snow\\5.png";
+	msnowMap[5].Load(snowPath);
+	snowPath = "res\\snow\\6.png";
+	msnowMap[6].Load(snowPath);
+	*/
 	//初始化雪花粒子
 	for (int i = 0; i < SNOW_NUMBER; i++)
 	{
