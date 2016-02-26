@@ -1,4 +1,4 @@
-
+ï»¿
 // ChildView.cpp : implementation of the CChildView class
 //
 
@@ -11,16 +11,16 @@
 #ifdef _DEBUG
 #define new DEBUG_NEW
 #endif
-//¶¨Ê±Æ÷µÄÃû³Æ
+//å®šæ—¶å™¨çš„åç§°
 #define TIMER_PAINT 1
 #define TIMER_HEROMOVE 2
-//¶¨ÒåËÄ¸ö·½Ïò
+//å®šä¹‰å››ä¸ªæ–¹å‘
 #define DOWN 0
 #define LEFT 1
 #define RIGHT 2
 #define UP 3
 
-//´°¿Ú´óĞ¡
+//çª—å£å¤§å°
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
 // CChildView
@@ -41,7 +41,7 @@ BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
-//½«pngÌùÍ¼Í¸Ã÷  
+//å°†pngè´´å›¾é€æ˜  
 void TransparentPNG(CImage *png)
 {
 	for (int i = 0; i < png->GetWidth(); i++)
@@ -68,11 +68,11 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	cs.lpszClass = AfxRegisterWndClass(CS_HREDRAW|CS_VREDRAW|CS_DBLCLKS, 
 		::LoadCursor(NULL, IDC_ARROW), reinterpret_cast<HBRUSH>(COLOR_WINDOW+1), NULL);
 
-	//---------------------------------ÓÎÏ·Êı¾İ³õÊ¼»¯²¿·Ö--------------------------------------------------------------
+	//---------------------------------æ¸¸æˆæ•°æ®åˆå§‹åŒ–éƒ¨åˆ†--------------------------------------------------------------
 	
 	CString bgPath("res\\bigbg.png");
 	mbg.Load(bgPath);
-	//»ñÈ¡±³¾°µØÍ¼¿í¶È
+	//è·å–èƒŒæ™¯åœ°å›¾å®½åº¦
 	mMapWidth = mbg.GetWidth();
 	
 	CString heroPath("res\\heroMove.png");
@@ -85,7 +85,7 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	Myhero.y = 400;
 
 	mxMapStart = 0;
-	//¼ÓÔØÑ©»¨Í¼Ïñ
+	//åŠ è½½é›ªèŠ±å›¾åƒ
 	
 	for (int i = 0; i < 7; i++)
 	{
@@ -93,27 +93,12 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 		CString num;
 		num.Format(_T("%d"), i);
 		CString snowPath;
-		snowPath = _T("res\\snow\\") + num + _T(".png");
+		snowPath = _T("res\\snow\\") + num + _T(".png"); //å°†æ–‡ä»¶è·¯å¾„è¿æ¥ï¼Œæœªæ‰¾åˆ°æ›´å¥½æ–¹æ³•
 		msnowMap[i].Load(snowPath);
 	}
 	
-	/*
-	CString snowPath("res\\snow\\0.png");
-	msnowMap[0].Load(snowPath);
-	snowPath = "res\\snow\\1.png";
-	msnowMap[1].Load(snowPath);
-	snowPath = "res\\snow\\2.png";
-	msnowMap[2].Load(snowPath);
-	snowPath = "res\\snow\\3.png";
-	msnowMap[3].Load(snowPath);
-	snowPath = "res\\snow\\4.png";
-	msnowMap[4].Load(snowPath);
-	snowPath = "res\\snow\\5.png";
-	msnowMap[5].Load(snowPath);
-	snowPath = "res\\snow\\6.png";
-	msnowMap[6].Load(snowPath);
-	*/
-	//³õÊ¼»¯Ñ©»¨Á£×Ó
+	
+	//åˆå§‹åŒ–é›ªèŠ±ç²’å­
 	for (int i = 0; i < SNOW_NUMBER; i++)
 	{
 		Snow[i].x = rand() % WINDOW_WIDTH;
@@ -122,19 +107,19 @@ BOOL CChildView::PreCreateWindow(CREATESTRUCT& cs)
 	}
 	return TRUE;
 }
-//¼ÆËã×ó¶ËX¿ªÊ¼Î»ÖÃ
+//è®¡ç®—å·¦ç«¯Xå¼€å§‹ä½ç½®
 void CChildView::GetMapStartX()
 {
-	//Èç¹ûÈËÎï²»ÔÚ×î×ó±ßºÍ×îÓÒ±ß°ë¸öÆÁÄ»ÄÚÊ±£¬µØÍ¼µÄÆğÊ¼×ø±êÊÇĞèÒª¸ù¾İÈËÎïÎ»ÖÃ¼ÆËãµÄ
+	//å¦‚æœäººç‰©ä¸åœ¨æœ€å·¦è¾¹å’Œæœ€å³è¾¹åŠä¸ªå±å¹•å†…æ—¶ï¼Œåœ°å›¾çš„èµ·å§‹åæ ‡æ˜¯éœ€è¦æ ¹æ®äººç‰©ä½ç½®è®¡ç®—çš„
 	if (Myhero.x<mMapWidth - WINDOW_WIDTH / 2 && Myhero.x>WINDOW_WIDTH / 2)
 	{
 		mxMapStart = Myhero.x - WINDOW_WIDTH / 2;
 	}
 }
-//»ñÈ¡ÈËÎïÔÚÆÁÄ»ÉÏµÄ×ø±ê
+//è·å–äººç‰©åœ¨å±å¹•ä¸Šçš„åæ ‡
 int GetScreenX(int xHero, int mapWidth)
 {
-	//Èç¹ûÈËÎï²»ÔÚ×î×ó±ßºÍ×îÓÒ±ß°ë¸öÆÁÄ»ÄÚÊ±£¬ÄÇÃ´ÈËÎï¾ÍÔÚÆÁÄ»ÖĞ¼ä
+	//å¦‚æœäººç‰©ä¸åœ¨æœ€å·¦è¾¹å’Œæœ€å³è¾¹åŠä¸ªå±å¹•å†…æ—¶ï¼Œé‚£ä¹ˆäººç‰©å°±åœ¨å±å¹•ä¸­é—´
 	if (xHero<mapWidth - WINDOW_WIDTH / 2 && xHero>WINDOW_WIDTH / 2)
 		return WINDOW_WIDTH / 2;
 	else if (xHero < WINDOW_WIDTH / 2)
@@ -145,22 +130,22 @@ int GetScreenX(int xHero, int mapWidth)
 void CChildView::OnPaint() 
 {
 	
-	//»ñÈ¡´°¿ÚDCÖ¸Õë
+	//è·å–çª—å£DCæŒ‡é’ˆ
 	CDC *cDC = this->GetDC();
-	//»ñÈ¡´°¿Ú´óĞ¡
+	//è·å–çª—å£å¤§å°
 	GetClientRect(&mclient);
-	//´´½¨»º³åDC
+	//åˆ›å»ºç¼“å†²DC
 	mcacheDC.CreateCompatibleDC(NULL);
 	mcacheCBitmap.CreateCompatibleBitmap(cDC,mclient.Width(),mclient.Height());
 	mcacheDC.SelectObject(&mcacheCBitmap);
-	//¼ÆËãµØÍ¼ÆğÊ¼Î»ÖÃ
+	//è®¡ç®—åœ°å›¾èµ·å§‹ä½ç½®
 	GetMapStartX();
-	//------------------¿ªÊ¼»æÖÆ---------------------------------------------
-	//Ìù±³¾°£¬ÏÖÔÚÌùÍ¼¾ÍÊÇÌùÔÚ»º³åDC:mcacheDCÖĞÁË
+	//------------------å¼€å§‹ç»˜åˆ¶---------------------------------------------
+	//è´´èƒŒæ™¯ï¼Œç°åœ¨è´´å›¾å°±æ˜¯è´´åœ¨ç¼“å†²DC:mcacheDCä¸­äº†
 	mbg.Draw(mcacheDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, mxMapStart, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
-	//ÌùÓ¢ĞÛ
+	//è´´è‹±é›„
 	Myhero.hero.Draw(mcacheDC, GetScreenX(Myhero.x, mMapWidth), Myhero.y, 80, 80, Myhero.frame * 80, Myhero.direct * 80, 80, 80);
-	//ÌùÑ©»¨
+	//è´´é›ªèŠ±
 	for (int i = 0; i < SNOW_NUMBER; i++)
 	{
 		msnowMap[Snow[i].number].Draw(mcacheDC, Snow[i].x, Snow[i].y, 32, 32);
@@ -178,9 +163,9 @@ void CChildView::OnPaint()
 		else if (Snow[i].x >= WINDOW_WIDTH)
 			Snow[i].x = 0;
 	}
-	//×îºó½«»º³åDCÄÚÈİÊä³öµ½´°¿ÚDCÖĞ
+	//æœ€åå°†ç¼“å†²DCå†…å®¹è¾“å‡ºåˆ°çª—å£DCä¸­
 	cDC->BitBlt(0, 0, mclient.Width(), mclient.Height(), &mcacheDC, 0, 0, SRCCOPY);
-	//------------------»æÖÆÍê±Ï--------------------------------------------
+	//------------------ç»˜åˆ¶å®Œæ¯•--------------------------------------------
 	ValidateRect(&mclient);
 	mcacheDC.DeleteDC();
 	mcacheCBitmap.DeleteObject();
