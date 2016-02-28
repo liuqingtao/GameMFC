@@ -1,4 +1,4 @@
-
+ï»¿
 // ChildView.h : interface of the CChildView class
 //
 
@@ -16,16 +16,16 @@ public:
 
 // Attributes
 public:
-	//Ñ©»¨Á£×Ó½á¹¹Ìå
+	//é›ªèŠ±ç²’å­ç»“æ„ä½“
 	struct snow
 	{
 		int x;
 		int y;
-		int number; //Á£×Ó±àºÅ£¬¹²ÆßÖÖÁ£×Ó
+		int number; //ç²’å­ç¼–å·ï¼Œå…±ä¸ƒç§ç²’å­
 	};
 	snow Snow[SNOW_NUMBER];
 	CImage msnowMap[7];
-	//Ó¢ĞÛ½á¹¹Ìå
+	//è‹±é›„ç»“æ„ä½“
 	struct shero
 	{
 		CImage hero;

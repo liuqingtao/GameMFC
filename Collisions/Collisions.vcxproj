@@ -212,6 +212,9 @@
   </ItemGroup>
   <ItemGroup>
     <Image Include="res\Collisions.ico" />
+    <Image Include="res\png\bg.png" />
+    <Image Include="res\png\heroMove.png" />
+    <Image Include="res\png\monster.png" />
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\Toolbar256.bmp" />
     <Image Include="UserImages.bmp" />

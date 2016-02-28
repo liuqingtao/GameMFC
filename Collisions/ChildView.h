@@ -16,7 +16,25 @@ public:
 
 // Attributes
 public:
+	//人物结构体
+	struct character
+	{
+		CImage character;
+		int x;
+		int y;
+		int direct;
+		int frame;
+		int width;
+		int height;
+		int Xcenter;
+		int Ycenter;
+	}Myhero,Monster;
+	CRect mClient;
+	CImage mBg;
 
+
+	CDC mCacheDC;
+	CBitmap mCacheCBitmap;
 // Operations
 public:
 

@@ -69,6 +69,15 @@
     <Image Include="res\Toolbar256.bmp">
       <Filter>Resource Files</Filter>
     </Image>
+    <Image Include="res\png\bg.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\png\heroMove.png">
+      <Filter>Resource Files</Filter>
+    </Image>
+    <Image Include="res\png\monster.png">
+      <Filter>Resource Files</Filter>
+    </Image>
   </ItemGroup>
   <ItemGroup>
     <None Include="res\Collisions.rc2">
