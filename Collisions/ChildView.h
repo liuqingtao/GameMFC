@@ -17,7 +17,7 @@ public:
 // Attributes
 public:
 	//人物结构体
-	struct character
+	struct charcter
 	{
 		CImage character;
 		int x;
