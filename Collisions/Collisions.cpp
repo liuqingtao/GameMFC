@@ -116,6 +116,7 @@ BOOL CCollisionsApp::InitInstance()
 
 
 	// The one and only window has been initialized, so show and update it
+	pFrame->SetWindowPos(NULL, 0, 0, 811, 632, SWP_NOMOVE);
 	pFrame->ShowWindow(SW_SHOW);
 	pFrame->UpdateWindow();
 	return TRUE;
