@@ -16,6 +16,8 @@
 #define RIGHT 2
 #define UP 3
 
+#define TIMER_PAINT 1
+#define TIMER_HEROMOVE 2
 //定义窗口大小
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -32,6 +34,9 @@ CChildView::~CChildView()
 
 BEGIN_MESSAGE_MAP(CChildView, CWnd)
 	ON_WM_PAINT()
+	ON_WM_KEYDOWN()
+	ON_WM_TIMER()
+	ON_WM_CREATE()
 END_MESSAGE_MAP()
 
 void TransparentPNG(CImage *png)
@@ -104,6 +109,7 @@ void CChildView::OnPaint()
 	//----------------------------绘制结束-------------------------------
 	//绘制完成使窗口有效
 	ValidateRect(&mClient);
+
 	mCacheDC.DeleteDC();
 	mCacheCBitmap.DeleteObject();
 	ReleaseDC(cDC);
@@ -112,3 +118,61 @@ void CChildView::OnPaint()
 	// Do not call CWnd::OnPaint() for painting messages
 }
 
+
+
+void CChildView::OnKeyDown(UINT nChar, UINT nRepCnt, UINT nFlags)
+{
+	// TODO: Add your message handler code here and/or call default
+	switch (nChar)
+	{
+	case 'D':
+		Myhero.direct = RIGHT;
+		Myhero.x += 5;
+		break;
+	case 'A':
+		Myhero.direct = LEFT;
+		Myhero.x -= 5;
+		break;
+	case 'W':
+		Myhero.direct = UP;
+		Myhero.y -= 5;
+		break;
+	case 'S':
+		Myhero.direct = DOWN;
+		Myhero.y += 5;
+		break;
+	}
+	
+}
+
+
+void CChildView::OnTimer(UINT_PTR nIDEvent)
+{
+	// TODO: Add your message handler code here and/or call default
+	switch (nIDEvent)
+	{
+	case TIMER_PAINT:
+		OnPaint();
+		break;
+	case TIMER_HEROMOVE:
+		Myhero.frame++;
+		if (Myhero.frame == 4)
+			Myhero.frame = 0;
+		Monster.frame++;
+		if (Monster.frame == 4)
+			Monster.frame = 0;
+	}
+
+}
+
+
+int CChildView::OnCreate(LPCREATESTRUCT lpCreateStruct)
+{
+	if (CWnd::OnCreate(lpCreateStruct) == -1)
+		return -1;
+
+	// TODO:  Add your specialized creation code here
+	SetTimer(TIMER_PAINT, 10, NULL);
+	SetTimer(TIMER_HEROMOVE, 100, NULL);
+	return 0;
+}

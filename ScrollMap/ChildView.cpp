@@ -14,6 +14,9 @@
 //定时器的名称
 #define TIMER_PAINT 1
 #define TIMER_HEROMOVE 2
+
+#define TIMER_PAINT 1
+#define TIMER_HEROMOVE 2
 //定义四个方向
 #define DOWN 0
 #define LEFT 1
