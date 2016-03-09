@@ -104,6 +104,44 @@ void CChildView::OnPaint()
 	mBg.Draw(mCacheDC, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, 0, 0, WINDOW_WIDTH, WINDOW_HEIGHT);
 	Myhero.character.Draw(mCacheDC, Myhero.x, Myhero.y, 80, 80, Myhero.frame * 80, Myhero.direct * 80, 80, 80);
 	Monster.character.Draw(mCacheDC, Monster.x, Monster.y, 96, 96, Monster.frame * 96, Monster.direct * 96, 96, 96);
+	
+	//怪物状态更新
+	//水平方向上靠近
+	if (Monster.x < Myhero.x)
+	{
+		Monster.x++;
+		Monster.direct = RIGHT;
+	}
+	else if (Monster.x>Myhero.x)
+	{
+		Monster.x--;
+		Monster.direct = LEFT;
+	}
+
+	//垂直方向上靠近
+	if (Monster.y < Myhero.y)
+		Monster.y++;
+	else
+		Monster.y--;
+
+	//判断是否碰撞
+	Myhero.Xcenter = Myhero.x + Myhero.width / 2;
+	Myhero.Ycenter = Myhero.y + Myhero.height / 2;
+	Monster.Xcenter = Monster.x + Monster.width / 2;
+	Monster.Ycenter = Monster.y + Monster.height / 2;
+
+	mCacheDC.SetBkMode(TRANSPARENT); //设置文字背影透明
+	mCacheDC.SetTextColor(RGB(255, 0, 0)); //设置文字为红色
+
+	//判断是否碰撞
+	if (Monster.Xcenter<Myhero.Xcenter + (Myhero.width / 2 + Monster.width / 2) &&
+		Monster.Xcenter>Myhero.Xcenter - (Myhero.width / 2 + Monster.width / 2) &&
+		Monster.Ycenter < Myhero.Ycenter + (Myhero.height / 2 + Monster.height / 2) &&
+		Monster.Ycenter > Myhero.Ycenter - (Myhero.height / 2 + Monster.height / 2))
+		mCacheDC.TextOutW(0, 0, _T("发生碰撞"));
+	else
+		mCacheDC.TextOutW(0, 0, _T("没有碰撞"));
+
 	//最后将缓冲DC内容输出到窗口DC中
 	cDC->BitBlt(0, 0, mClient.Width(), mClient.Height(), &mCacheDC, 0, 0, SRCCOPY);
 	//----------------------------绘制结束-------------------------------
